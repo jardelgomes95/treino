@@ -1,0 +1,21 @@
+{% extends 'adminlte/base.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap4  %}
+{% block content  %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Treino</title>
+</head>
+<body>
+    <div class="container">
+        <h1><b>Cadastrar Treino</b></h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <a class="btn btn-secondary" href="{% url 'listar_matricula' %}">Voltar</a>
+        <input class="btn btn-success" type="submit" value="Salvar">
+    </form>
+{% endblock %}

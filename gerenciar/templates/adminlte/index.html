@@ -1,0 +1,22 @@
+{% extends 'adminlte/base.html' %}
+
+{% block content %}
+your awesome content
+{% endblock %}
+
+<!-- Importando o Jquery -->
+        <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+        <script src="{% static 'js/popper.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+        {% block scripts %}
+        <script>
+                $(document).ready(function(){
+
+                    alert("Página Carregada")
+
+                });
+        </script>
+
+
+        {% endblock %}

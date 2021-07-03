@@ -1,0 +1,30 @@
+{% extends 'adminlte/base.html' %}
+{% load bootstrap4 %}
+{% block content  %}
+{% load crispy_forms_tags %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Excluir Aluno</title>
+</head>
+
+<h1><b>EXCLUIR ALUNO</b></h1>
+
+
+
+<form action="" method="post">
+
+
+    <div>
+        <h3>Tem certeza que deseja deletar o aluno selecionado: <b>{{ object.nome }}</b> com o CPF <b>{{ object.cpf }}</b> e número de matricula<b>{{ object.num_matricula }}?</h3>
+    </div>
+        {% csrf_token %}
+        {{ form|crispy }}
+
+
+
+  <a class="btn btn-secondary" href="{% url 'listar_matricula' %}">Voltar</a>
+    <button type="submit" class="btn btn-danger" value="Excluir">Excluir</button>
+</form>
+
+{% endblock %}

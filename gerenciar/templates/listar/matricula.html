@@ -1,0 +1,68 @@
+{% extends 'adminlte/base.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista</title>
+
+</head>
+
+    <h1><b>ALUNOS KL FITNESS</b></h1>
+    <a class="btn btn-success" href="{% url 'matricula' %}"><i class="fa fa-plus"></i> MATRICULAR</a>
+
+    <table class="table table-bordered" id="tabela-listar">
+        <thead>
+            <th>MATRICULA</th>
+            <th>NOME</th>
+            <th>PRÓXIMO VENCIMENTO</th>
+            <th>CLIENTE DESDE</th>
+            <th>PLANO</th>
+            <th>DESCONTO</th>
+            <th>VALOR</th>
+
+
+        </thead>
+        <tbody>
+    {% for obj_matricula in object_list %}
+            <tr>
+                <td>{{obj_matricula.num_matricula}}</td>
+                <td>{{obj_matricula.nome}}</td>
+                <td>{{obj_matricula.data_de_vencimento}}</td>
+                <td>{{obj_matricula.data_da_matricula}}</td>
+                <td>{{obj_matricula.plano}}</td>
+                <td>{{obj_matricula.desconto}}</td>
+                <td>{{obj_matricula.valor_total}}</td>
+                <td><a href="{% url 'atualizar_matricula' obj_matricula.pk %}"><i class="btn btn-success btn-sm fa fa-edit" rel="tooltip" title="ATUALIZAR"></i> </a>
+                <td><a href="{% url 'detalhar_matricula' obj_matricula.pk %}"><i class="btn btn-success btn-sm fa fa-eye" rel="tooltip" title="VER DETALHES"></i> </a>
+                <td><a href="{% url 'deletar_matricula' obj_matricula.pk %}"><i class="btn btn-danger btn-sm fa fa-times-circle" rel="tooltip" title="DELETAR"></i></a>
+                <td><a target="_blank" href="{% url 'pdf_matricula' obj_matricula.pk %}"><i class="btn btn-success btn-sm fa fa-file" rel="tooltip" title="IMPRIMIR"></i></a>
+            </tr>
+    {% empty %}
+        <h3>DESCULPE, VOCÊ AINDA NÃO POSSUI ALUNOS CADASTRADOS EM SEU SISTEMA.
+            <br/>(–_–)</h3>
+    {% endfor %}
+        </tbody>
+    </table>
+
+     {% if is_paginated %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-default" href="?page=1">&laquo; Primeira Página </a>
+                <a class="btn btn-primary" href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-arrow-left"></i> Página Anterior </a>
+                {% endif %}
+
+                <span class="current">
+                    | Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}. |
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a class="btn btn-primary" href="?page={{ page_obj.next_page_number }}">Próxima Página <i class="fa fa-arrow-right"></i></a>
+                    <a class="btn btn-default" href="?page={{ page_obj.paginator.num_pages }}">| Última Página &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+{% endblock %}
+
