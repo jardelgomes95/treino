@@ -3,6 +3,7 @@
 {% load static %}
 
 <head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.css"/>
     <meta charset="UTF-8">
     <title>Lista</title>
 
@@ -12,7 +13,7 @@
     <a class="btn btn-success" href="{% url 'matricula' %}"><i class="fa fa-plus"></i> MATRICULAR</a>
 
     <table class="table table-bordered" id="tabela-listar">
-        <thead>
+        <thead class="bg-success">
             <th>MATRICULA</th>
             <th>NOME</th>
             <th>PRÓXIMO VENCIMENTO</th>
@@ -20,7 +21,10 @@
             <th>PLANO</th>
             <th>DESCONTO</th>
             <th>VALOR</th>
-
+            <th>ATUALIZAR</th>
+            <th>VER DETALHES</th>
+            <th>EXCLUIR</th>
+            <th>IMPRIMIR COMPROVANTE</th>
 
         </thead>
         <tbody>

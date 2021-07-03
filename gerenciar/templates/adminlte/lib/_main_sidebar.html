@@ -52,19 +52,19 @@
                 <!-- Bloco de código de árvore de itens do menú -->
                 <li class="nav-item has-tree-view ">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-paperclip"></i> <p>Matricula</p>
+                        <i class="nav-icon fas fa-users"></i> <p>Matricula</p>
                         <p><i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview menu-open">
                         <li class="nav-item">
                             <a href="{% url 'listar_matricula' %}" class="nav-link">
-                                <i class="nav-icon fas fa-list"></i> Listar
+                                <i class="nav-icon fas fa-list"></i> Ver Matriculados
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{% url 'matricula' %}" class="nav-link">
-                                <i class="nav-icon fas fa-plus"></i> Cadastrar
+                                <i class="nav-icon fas fa-plus"></i> Adicionar
                             </a>
                         </li>
                     </ul>
@@ -90,6 +90,65 @@
                     </ul>
                 </li>
 
+                <li class="nav-item has-tree-view ">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas  fa-bicycle"></i> <p>Treino</p>
+                        <p><i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview menu-open">
+                        <li class="nav-item">
+                            <a href="{% url 'listar_frequencia' %}" class="nav-link">
+                                <i class="nav-icon fas fa-list"></i> Ver Treinos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'frequencia' %}" class="nav-link">
+                                <i class="nav-icon fas fa-plus"></i> Novo Treino
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item has-tree-view ">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas  fa-fire"></i> <p>Crossfit</p>
+                        <p><i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview menu-open">
+                        <li class="nav-item">
+                            <a href="{% url 'listar_frequencia' %}" class="nav-link">
+                                <i class="nav-icon fas fa-list"></i> Ver Turmas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'frequencia' %}" class="nav-link">
+                                <i class="nav-icon fas fa-plus"></i> Adicionar Aluno
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item has-tree-view ">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas   fa-user-md"></i> <p>Ficha Médica</p>
+                        <p><i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview menu-open">
+                        <li class="nav-item">
+                            <a href="{% url 'listar_frequencia' %}" class="nav-link">
+                                <i class="nav-icon fas fa-list"></i> Ver Lista
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'frequencia' %}" class="nav-link">
+                                <i class="nav-icon fas fa-plus"></i> Adicionar Aluno
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 {% endblock nav_links %}
                 {% endblock nav_links_outer %}
             </ul>
