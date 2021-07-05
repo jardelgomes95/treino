@@ -1,0 +1,59 @@
+{% extends 'adminlte/base.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista</title>
+
+</head>
+
+    <h1><b>EXERCÍCIOS DE MUSCULAÇÃO</b></h1>
+    <a class="btn btn-success" href="{% url 'treino' %}"><i class="fa  fa-user-plus"></i> CADASTRAR</a>
+
+    <table class="table table-bordered" id="tabela-ex">
+        <thead>
+            <th>ID</th>
+            <th>NOME</th>
+
+        </thead>
+        <tbody>
+    {% for obj_treinoA in object_list %}
+            <tr>
+                <td>{{obj_treinoA.pk}}</td>
+                <td>{{obj_treinoA.nome}}</td>
+
+                <td>
+                <a href="{% url 'atualizar_treino' obj_treinoA.pk %}"><i class="btn btn-success btn-sm fa fa-edit" rel="tooltip" title="ATUALIZAR"></i> </a>
+                <a href="{% url 'detalhar_treino' obj_treinoA.pk %}"><i class="btn btn-success btn-sm fa fa-eye" rel="tooltip" title="VER DETALHES"></i> </a>
+                <a href="{% url 'deletar_treino' obj_treinoA.pk %}"><i class="btn btn-danger btn-sm fa fa-times-circle" rel="tooltip" title="DELETAR"></i></a>
+                <a target="_blank" href="{% url 'pdf_treino' obj_treinoA.pk %}"><i class="btn btn-success btn-sm fa fa-file" rel="tooltip" title="IMPRIMIR"></i></a>
+                </td>
+            </tr>
+    {% empty %}
+        <h3>DESCULPE, NÃO HÁ DADOS NO SISTEMA.
+            <br/>(–_–)</h3>
+    {% endfor %}
+        </tbody>
+    </table>
+
+     {% if is_paginated %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-default" href="?page=1">&laquo; Primeira Página </a>
+                <a class="btn btn-primary" href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-arrow-left"></i> Página Anterior </a>
+                {% endif %}
+
+                <span class="current">
+                    | Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}. |
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a class="btn btn-primary" href="?page={{ page_obj.next_page_number }}">Próxima Página <i class="fa fa-arrow-right"></i></a>
+                    <a class="btn btn-default" href="?page={{ page_obj.paginator.num_pages }}">| Última Página &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+{% endblock %}

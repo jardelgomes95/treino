@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, UpdateView, DetailView, TemplateView, FormView, DeleteView
+from django.views.generic import CreateView, ListView, UpdateView, DetailView, TemplateView, FormView, DeleteView, View
 from django.shortcuts import render
-from .models import matricula, treinoA, frequencia, ficha_de_saude, medicamento
+from .models import matricula, treinoA, frequencia, ficha_de_saude, medicamento, cadastrar_exercicio
 from .forms import matriculaForm, frequencia_saida, frequencia_entrada
 from easy_pdf.views import PDFTemplateResponseMixin
 from django.http import HttpResponseRedirect
@@ -37,14 +37,6 @@ class matriculaListView(ListView):
     paginate_by = 50
     ordering = '-pk'
 
-class matriculaDeleteView(DeleteView):
-    model = matricula
-    template_name = 'excluir/matricula.html'
-
-    def get_success_url(self):
-        messages.success(self.request, 'Aluno excluído com Sucesso!')
-        return reverse_lazy("listar_matricula")
-
 
 class matriculaUpdateView(UpdateView):
     model = matricula
@@ -62,9 +54,26 @@ class matriculaDetailView(DetailView):
 
 class matriculaPDFDetailView(PDFTemplateResponseMixin, DetailView):
     model = matricula
-    template_name = 'detalhar/pdfmatricula.html'
+    template_name = 'detalhar/matriculapdf.html'
 
 
+
+class matriculaView(View):
+    def desabilitarMatricula(self, pk: int):
+        matricula.objects.filter(id=pk).update(excluido=True)
+        return HttpResponseRedirect(reverse_lazy('listar_matricula'))
+
+    def habilitarMatricula(self, pk: int):
+        matricula.objects.filter(id=pk).update(excluido=False)
+        return HttpResponseRedirect(reverse_lazy('listar_matricula'))
+
+
+class matriculaDeleteView(DeleteView):
+    model = matricula
+    template_name = 'excluir/matricula.html'
+
+    def get_success_url(self):
+        messages.success(self.request, 'Aluno excluído com Sucesso!')
 
 
 
@@ -76,7 +85,45 @@ class treino(CreateView):
     template_name = 'cadastrar/treino.html'
     fields = '__all__'
 
+    def get_success_url(self):
+        messages.success(self.request, 'Treino cadastrado Sucesso!')
+        return reverse_lazy("listar_treino")
 
+
+class treinoListView(ListView):
+    model = treinoA
+    template_name = 'listar/treino.html'
+    paginate_by = 100
+    ordering = '-pk'
+
+
+class treinoUpdateView(UpdateView):
+    model = treinoA
+    template_name = 'atualizar/treino.html'
+    fields = '__all__'
+
+    def get_success_url(self):
+        messages.success(self.request, 'Treino atualizado Sucesso!')
+        return reverse_lazy("listar_treino")
+
+
+class treinoDeleteView(DeleteView):
+    model = treinoA
+    template_name = 'excluir/treino.html'
+
+    def get_success_url(self):
+        messages.success(self.request, 'Treino excluido Sucesso!')
+        return reverse_lazy("listar_treino")
+
+
+
+class treinoDetailView(DetailView):
+    model = treinoA
+    template_name = 'detalhar/treino.html'
+
+class treinoPDFDetailView(PDFTemplateResponseMixin, DetailView):
+    model = treinoA
+    template_name = 'detalhar/treinopdf.html'
 
 
 
@@ -114,3 +161,32 @@ class frequenciaDeleteView(DeleteView):
     def get_success_url(self):
         messages.success(self.request, 'Aluno excluído com Sucesso!')
         return reverse_lazy("listar_frequencia")
+
+
+#######Exercicio###########
+
+
+
+class exercicioCreateView(CreateView):
+    model = cadastrar_exercicio
+    template_name = 'cadastrar/exercicio.html'
+    fields = '__all__'
+
+
+    def get_success_url(self):
+        messages.success(self.request, 'exercicio cadastrado com Sucesso!')
+        return reverse_lazy("cadastrar_exercicio")
+
+class exercicioListView(ListView):
+    model = cadastrar_exercicio
+    template_name = 'listar/exercicio.html'
+    paginate_by = 100
+    ordering = '-pk'
+
+class exercicioDeleteView(DeleteView):
+    model = cadastrar_exercicio
+    template_name = 'excluir/exercicio.html'
+
+    def get_success_url(self):
+        messages.success(self.request, 'Aluno excluído com Sucesso!')
+        return reverse_lazy("listar_exercicio")

@@ -1,0 +1,88 @@
+{% extends "easy_pdf/base.html" %}
+{% load static %}
+
+<head>
+<title>Treino</title>
+
+
+{% block style_base %}
+        {% comment %}
+            See DEFAULT_CSS in https://github.com/chrisglass/xhtml2pdf/blob/master/xhtml2pdf/default.py
+            for base style.
+        {% endcomment %}
+
+
+        {% block layout_style %}
+            <style type="text/css">
+                @page {
+                    size: {{ pagesize|default:"A4" }};
+                    margin-left: 3cm;
+                    margin-right: 2cm;
+                    margin-top: 3cm;
+                    margin-bottom: 2cm;
+
+                    @frame header {
+                        -pdf-frame-content: page-header;
+                        margin-top: 0.7cm;
+                        margin-right: 2mm;
+                        margin-bottom: 0cm;
+                        margin-left: 1.2cm;
+                    }
+
+                    @frame footer {
+                        -pdf-frame-content: page-footer;
+                        bottom: 0cm;
+                        margin-left: 1cm;
+                        margin-right: 1cm;
+                        height: 1cm;
+                    }
+                }
+            </style>
+        {%endblock%}
+</head>
+
+{% endblock %}
+
+
+
+<body>
+{% block content %}
+
+<meta charset="utf-8">
+
+<div id="content">
+    <div class="main">
+
+    <h2><center><b>Treino A {{ object.pk }} </b></center></h2>
+
+<h4><b>Nome:</b> {{ object.nome }} &ensp;</h4>
+    <br/>
+<h4><b>1:</b> {{ object.aexc_1 }} &ensp;</h4>
+    <br/>
+<h4><b>2:</b> {{ object.aexc_2 }} &ensp;</h4>
+    <br/>
+<h4><b>3:</b> {{ object.aexc_3 }} &ensp;</h4>
+    <br/>
+<h4><b>4:</b> {{ object.aexc_4 }} &ensp;</h4>
+    <br/>
+<h4><b>5:</b> {{ object.aexc_5 }} &ensp; </h4>
+    <br/>
+<h4><b>6:</b> {{ object.aexc_6 }} &ensp;</h4>
+    <br/>
+<h4><b>7:</b> {{ object.aexc_7 }} &ensp;</h4>
+    <br/>
+<h4><b>8:</b> {{ object.aexc_8 }} &ensp;</h4>
+    <br/>
+<h4><b>9:</b> {{ object.aexc_9 }} &ensp;</h4>
+    <br/>
+<h4><b>10:</b> {{ object.aexc_10 }} &ensp;</h4>
+    <br/>
+<h4><b>11:</b> {{ object.aexc_11 }} &ensp;</h4>
+    <br/>
+<h4><b>12:</b> {{ object.aexc_12 }} &ensp;</h4>
+
+
+    </div>
+</div>
+</body>
+{% endblock %}

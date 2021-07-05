@@ -1,0 +1,79 @@
+{% extends "easy_pdf/base.html" %}
+{% load static %}
+
+<head>
+<title>Comprovante de Matricula</title>
+
+
+{% block style_base %}
+        {% comment %}
+            See DEFAULT_CSS in https://github.com/chrisglass/xhtml2pdf/blob/master/xhtml2pdf/default.py
+            for base style.
+        {% endcomment %}
+
+
+        {% block layout_style %}
+            <style type="text/css">
+                @page {
+                    size: {{ pagesize|default:"A4" }};
+                    margin-left: 3cm;
+                    margin-right: 2cm;
+                    margin-top: 3cm;
+                    margin-bottom: 2cm;
+
+                    @frame header {
+                        -pdf-frame-content: page-header;
+                        margin-top: 0.7cm;
+                        margin-right: 2mm;
+                        margin-bottom: 0cm;
+                        margin-left: 1.2cm;
+                    }
+
+                    @frame footer {
+                        -pdf-frame-content: page-footer;
+                        bottom: 0cm;
+                        margin-left: 1cm;
+                        margin-right: 1cm;
+                        height: 1cm;
+                    }
+                }
+            </style>
+        {%endblock%}
+</head>
+
+{% endblock %}
+
+
+
+<body>
+{% block content %}
+
+<meta charset="utf-8">
+
+<div id="content">
+    <div class="main">
+
+    <h2><center><b>Comprovante de Matricula {{ object.num_matricula }} </b></center></h2>
+
+<h4><b>Nome:</b> {{ object.nome }} &ensp; <b>CPF:</b> {{ object.cpf }} &ensp; &ensp;  <b>Sexo:</b> {{ object.sexo }} &ensp;  <b>Foto:</b> {{ object.foto }} </h4>
+<br/>
+<br/>
+<h4><b>Email:</b> {{ object.email }} &ensp; &ensp;  <b>Telefone:</b> {{ object.telefone }}</h4>
+<br/>
+<br/>
+<h4><b>Endereço:</b> {{ object.endereco }}</h4>
+<br/>
+<h4><b>Data da Matricula:</b> &ensp; &ensp; {{ object.data_da_matricula }}</h4>
+<br/>
+<h4><b>Plano:</b> {{ object.plano }}</h4>
+<br/>
+<h4><b>Valor:</b> {{ object.valor }} &ensp; &ensp; <b>Desconto:</b> {{ object.desconto }} &ensp; &ensp; <b>Valor Total:</b> {{ object.valor_total }}</h4>
+<br/>
+<h4><b>Número da Matricula:</b> {{ object.num_matricula }}</h4>
+<br/>
+<h4><b>Observações:</b> {{ object.observacoes|linebreaks }}</h4>
+
+    </div>
+</div>
+</body>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'adminlte/base.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista</title>
+
+</head>
+
+    <h1><b>EXERCÍCIOS DE MUSCULAÇÃO</b></h1>
+    <a class="btn btn-success" href="{% url 'cadastrar_exercicio' %}"><i class="fa  fa-user-plus"></i> CADASTRAR</a>
+
+    <table class="table table-bordered" id="tabela-ex">
+        <thead>
+            <th>ID</th>
+            <th>EXERCICIO</th>
+            <th>REPETIÇÕES</th>
+
+        </thead>
+        <tbody>
+    {% for obj_cadastrar_exercicio in object_list %}
+            <tr>
+                <td>{{obj_cadastrar_exercicio.pk}}</td>
+                <td>{{obj_cadastrar_exercicio.exercicio}}</td>
+                <td>{{obj_cadastrar_exercicio.repetições}}</td>
+
+
+                <td><a href="{% url 'deletar_exercicio' obj_cadastrar_exercicio.pk %}"><i class=" fa  fa-trash" rel="tooltip" title="DELETAR"></i></a>
+
+            </tr>
+    {% empty %}
+        <h3>DESCULPE, NÃO HÁ DADOS NO SISTEMA.
+            <br/>(–_–)</h3>
+    {% endfor %}
+        </tbody>
+    </table>
+
+     {% if is_paginated %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-default" href="?page=1">&laquo; Primeira Página </a>
+                <a class="btn btn-primary" href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-arrow-left"></i> Página Anterior </a>
+                {% endif %}
+
+                <span class="current">
+                    | Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}. |
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a class="btn btn-primary" href="?page={{ page_obj.next_page_number }}">Próxima Página <i class="fa fa-arrow-right"></i></a>
+                    <a class="btn btn-default" href="?page={{ page_obj.paginator.num_pages }}">| Última Página &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+{% endblock %}
