@@ -129,10 +129,10 @@ class medicamento(models.Model):
 
 class cadastrar_exercicio(models.Model):
     exercicio = models.CharField(max_length=32, null=False, blank=False,verbose_name='Exercicio')
-    repetições = models.CharField(max_length=4, default='3x12', null=False, blank=False, verbose_name='Repetições')
+
 
     def __str__(self):
-        return f'{self.exercicio} - {self.repetições}'
+        return f'{self.exercicio}'
 
 
 
@@ -141,18 +141,30 @@ class cadastrar_exercicio(models.Model):
 
 class treinoA(models.Model):
     nome = models.ForeignKey('matricula', on_delete=models.DO_NOTHING, default=None, verbose_name="Aluno")
-    aexc_1 = models.ForeignKey(cadastrar_exercicio, on_delete=models.DO_NOTHING, related_name='treino1', default=None, null=False, verbose_name='1')
-    aexc_2 = models.ForeignKey(cadastrar_exercicio, on_delete=models.DO_NOTHING, related_name='treino2', default=None, null=False, verbose_name="2")
-    aexc_3 = models.ForeignKey(cadastrar_exercicio, on_delete=models.DO_NOTHING, related_name='treino3', default=None, null=False, verbose_name="3")
-    aexc_4 = models.ForeignKey(cadastrar_exercicio, on_delete=models.DO_NOTHING, related_name='treino4', default=None, null=False, verbose_name="4")
-    aexc_5 = models.ForeignKey(cadastrar_exercicio, on_delete=models.DO_NOTHING, related_name='treino5', default=None, null=False, verbose_name="5")
-    aexc_6 = models.ForeignKey(cadastrar_exercicio, on_delete=models.DO_NOTHING, related_name='treino6', default=None, null=False, verbose_name="6")
-    aexc_7 = models.ForeignKey(cadastrar_exercicio, on_delete=models.DO_NOTHING, related_name='treino7', default=None, null=False, verbose_name="7")
-    aexc_8 = models.ForeignKey(cadastrar_exercicio, on_delete=models.DO_NOTHING, related_name='treino8', default=None, null=False, verbose_name="8")
-    aexc_9 = models.ForeignKey(cadastrar_exercicio, on_delete=models.DO_NOTHING, related_name='treino9', default=None, null=False, verbose_name="9")
-    aexc_10 = models.ForeignKey(cadastrar_exercicio, on_delete=models.DO_NOTHING, related_name='treino10', default=None, null=False, verbose_name="10")
-    aexc_11 = models.ForeignKey(cadastrar_exercicio, on_delete=models.DO_NOTHING, related_name='treino11', default=None, null=False, verbose_name="11")
-    aexc_12 = models.ForeignKey(cadastrar_exercicio, on_delete=models.DO_NOTHING, related_name='treino12', default=None, null=False, verbose_name="12")
+    aexc_1 = models.CharField(max_length=32, blank=False, null=False, verbose_name='A1')
+    rep1 = models.CharField(max_length=6, blank=False, null=False, verbose_name='RP')
+    aexc_2 = models.CharField(max_length=32, blank=False, null=False, verbose_name='A2')
+    rep2 = models.CharField(max_length=6, blank=False, null=False, verbose_name='RP')
+    aexc_3 = models.CharField(max_length=32, blank=False, null=False, verbose_name='A3')
+    rep3 = models.CharField(max_length=6, blank=False, null=False, verbose_name='RP')
+    aexc_4 = models.CharField(max_length=32, blank=False, null=False, verbose_name='A4')
+    rep4 = models.CharField(max_length=6, blank=False, null=False, verbose_name='RP')
+    aexc_5 = models.CharField(max_length=32, blank=False, null=False, verbose_name='A5')
+    rep5 = models.CharField(max_length=6, blank=False, null=False, verbose_name='RP')
+    aexc_6 = models.CharField(max_length=32, blank=False, null=False, verbose_name='A6')
+    rep6 = models.CharField(max_length=6, blank=False, null=False, verbose_name='RP')
+    aexc_7 = models.CharField(max_length=32, blank=False, null=False, verbose_name='A7')
+    rep7 = models.CharField(max_length=6, blank=False, null=False, verbose_name='RP')
+    aexc_8 = models.CharField(max_length=32, blank=False, null=False, verbose_name='A8')
+    rep8 = models.CharField(max_length=6, blank=False, null=False, verbose_name='RP')
+    aexc_9 = models.CharField(max_length=32, blank=False, null=False, verbose_name='A9')
+    rep9 = models.CharField(max_length=6, blank=False, null=False, verbose_name='RP')
+    aexc_10 = models.CharField(max_length=32, blank=True, null=False, verbose_name='A10')
+    rep10 = models.CharField(max_length=6, blank=True, null=False, verbose_name='RP')
+    aexc_11 = models.CharField(max_length=32, blank=True, null=False, verbose_name='A11')
+    rep11 = models.CharField(max_length=6, blank=True, null=False, verbose_name='RP')
+    aexc_12 = models.CharField(max_length=32, blank=True, null=False, verbose_name='A12')
+    rep12 = models.CharField(max_length=6, blank=True, null=False, verbose_name='RP')
 
     def __str__(self):
         return f'{self.nome}'

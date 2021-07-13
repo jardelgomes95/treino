@@ -58,14 +58,6 @@ class matriculaPDFDetailView(PDFTemplateResponseMixin, DetailView):
 
 
 
-class matriculaView(View):
-    def desabilitarMatricula(self, pk: int):
-        matricula.objects.filter(id=pk).update(excluido=True)
-        return HttpResponseRedirect(reverse_lazy('listar_matricula'))
-
-    def habilitarMatricula(self, pk: int):
-        matricula.objects.filter(id=pk).update(excluido=False)
-        return HttpResponseRedirect(reverse_lazy('listar_matricula'))
 
 
 class matriculaDeleteView(DeleteView):

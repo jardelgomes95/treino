@@ -10,12 +10,46 @@
 </head>
 <body>
     <div class="container">
-        <h1><b>Cadastrar Treino</b></h1>
+       <center><h1><b>Cadastrar Treino</b></h1></center>
 
+
+<br/>
+<br/>
+<h2><b>Treino A</b></h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form|crispy }}
+        <div class="form-row">
+      <div class="form-group col-md-6 mb-0">
+        {{ form.aexc_1|as_crispy_field }}
+          {{ form.aexc_2|as_crispy_field }}
+          {{ form.aexc_3|as_crispy_field }}
+          {{ form.aexc_4|as_crispy_field }}
+          {{ form.aexc_5|as_crispy_field }}
+          {{ form.aexc_6|as_crispy_field }}
+          {{ form.aexc_7|as_crispy_field }}
+          {{ form.aexc_8|as_crispy_field }}
+          {{ form.aexc_9|as_crispy_field }}
+          {{ form.aexc_10|as_crispy_field }}
+          {{ form.aexc_11|as_crispy_field }}
+          {{ form.aexc_12|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-1 mb-0">
+        {{ form.rep1|as_crispy_field }}
+          {{ form.rep2|as_crispy_field }}
+          {{ form.rep3|as_crispy_field }}
+          {{ form.rep4|as_crispy_field }}
+          {{ form.rep5|as_crispy_field }}
+          {{ form.rep6|as_crispy_field }}
+          {{ form.rep7|as_crispy_field }}
+          {{ form.rep8|as_crispy_field }}
+          {{ form.rep9|as_crispy_field }}
+          {{ form.rep10|as_crispy_field }}
+          {{ form.rep11|as_crispy_field }}
+          {{ form.rep12|as_crispy_field }}
+      </div>
+            </div>
+    </form>
         <a class="btn btn-secondary" href="{% url 'listar_matricula' %}">Voltar</a>
         <input class="btn btn-success" type="submit" value="Salvar">
-    </form>
+
 {% endblock %}

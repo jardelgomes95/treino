@@ -1,6 +1,7 @@
+from django.contrib import admin
 from django.urls import path
-from .views import matriculaUpdateView, index, matriculaDetailView, matriculaCreateView,  matriculaListView, indexadmin
-from .views import matriculaDeleteView, matriculaPDFDetailView, frequenciaCreateview, frequenciaListView, frequenciaUpdatesaida, frequenciaDeleteView, matriculaView
+from .views import matriculaUpdateView, index, matriculaDetailView, matriculaCreateView,  matriculaListView
+from .views import matriculaDeleteView, matriculaPDFDetailView, frequenciaCreateview, frequenciaListView, frequenciaUpdatesaida, frequenciaDeleteView
 from .views import exercicioListView, exercicioCreateView, exercicioDeleteView
 from .views import treinoDeleteView, treinoListView, treinoDetailView, treinoPDFDetailView,  treino, treinoUpdateView
 
@@ -12,8 +13,6 @@ urlpatterns = [
     path('alunos', matriculaListView.as_view(), name="listar_matricula"),
     path('matricula/atualizar/<int:pk>', matriculaUpdateView.as_view(), name="atualizar_matricula"),
     path('matricula/detalhar/<int:pk>', matriculaDetailView.as_view(), name="detalhar_matricula"),
-    path('ajax/desabilitar/matricula/<int:pk>', matriculaView.desabilitarMatricula, name="ajax_desabilitar_matricula"),
-    path('ajax/habilitar/matricula/<int:pk>', matriculaView.habilitarMatricula, name="ajax_habilitar_matricula"),
     path('matricula/deletar/<int:pk>', matriculaDeleteView.as_view(), name="deletar_matricula"),
     path('matricula/pdf/<int:pk>', matriculaPDFDetailView.as_view(), name="pdf_matricula"),
 

@@ -3,7 +3,6 @@
 {% load static %}
 
 <head>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.css"/>
     <meta charset="UTF-8">
     <title>Lista</title>
 
@@ -12,7 +11,7 @@
     <h1><b>ALUNOS KL FITNESS</b></h1>
     <a class="btn btn-success" href="{% url 'matricula' %}"><i class="fa fa-plus"></i> MATRICULAR</a>
 
-    <table class="table table-bordered" id="tabela-listar">
+    <table class="table table-striped" id="tabela-listar">
         <thead class="bg-success">
             <th>MATRICULA</th>
             <th>NOME</th>
@@ -37,13 +36,10 @@
                 <td>
                 <a href="{% url 'atualizar_matricula' obj_matricula.pk %}"><i class="btn btn-success btn-sm fa fa-edit" rel="tooltip" title="ATUALIZAR"></i> </a>
                 <a href="{% url 'detalhar_matricula' obj_matricula.pk %}"><i class="btn btn-success btn-sm fa fa-eye" rel="tooltip" title="VER DETALHES"></i> </a>
-                <a href="{% url 'deletar_matricula' obj_matricula.pk %}"><i class="btn btn-danger btn-sm fa fa-times-circle" rel="tooltip" title="DELETAR"></i></a>
                 <a target="_blank" href="{% url 'pdf_matricula' obj_matricula.pk %}"><i class="btn btn-success btn-sm fa fa-file" rel="tooltip" title="IMPRIMIR"></i></a>
-                {% if obj_matricula.excluido is False %}
-                <button>class="desabilitar" data-url="{% url 'ajax_desabilitar_matricula' obj_matricula.pk %}" href="#"><i class="btn btn-success btn-sm fas fa-eye" rel="tooltip" title="Desabilitar"></i></button>
-                {% else %}
-                <a class="habilitar" data-url="{% url 'ajax_habilitar_matricula' obj_matricula.pk %}" href="#"><i class="btn btn-success btn-sm fas fa-edit" rel="tooltip" title="Habilitar"></i></a>
-                {% endif %}
+                <a href="{% url 'deletar_matricula' obj_matricula.pk %}"><i class="btn btn-danger btn-sm fa fa-times-circle" rel="tooltip" title="EXCLUIR"></i></a>
+
+
                 </td>
             </tr>
     {% empty %}
@@ -73,84 +69,4 @@
         </div>
     {% endif %}
 {% endblock %}
-{% block javascript %}
-{% include 'adminlte/lib/_scripts.html' %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Vai ser executado apenas após a página estar pronta. Ou seja, carregada.
 
-            // Clicando no ícone de desabilitar
-            $(".desabilitar").click(function() {
-                //Capturando o valor da propriedate "data-url" que está na tag do ícone com a classe "desabilitar-matricula"
-                var url = $(this).attr('data-url');
-
-                //Abrindo o nosso modal (popup) do SweetAlert com as opções de "confirmação de açao" e "cancelar ação"
-                swal({
-                  title: "Desabilitar Matricula",
-                  text: "Tem certeza que deseja desabilitar esta matricula?",
-                  icon: "warning",
-                  buttons: true,
-                  dangerMode: true,
-                })
-                .then((willDelete) => {
-                  if (willDelete) {
-
-                    //Se clicar na ação de confirmar a deleção, irá iniciar o AJAX
-                    $.ajax({
-                        url: url,
-                        success: function (data) {
-
-                            //No sucesso do AJAX, irá exibir uma modal com SweetAlert informando que a desabilitação foi realizada com sucesso
-                            swal("Matricula desabilitada com sucesso!", {
-                              icon: "success",
-                              timer: 3000
-                            });
-
-                            //Recarregando a página
-                            location.reload();
-                        }
-                    });
-
-                  } else {
-
-                    //Exibindo o SweetAlert caso o usuário cancele a ação
-                    swal("Ação cancelada...");
-                  }
-                });
-            });
-
-            //Clicando no ícone de habilitar
-            $(".habilitar").click(function() {
-                var url = $(this).attr('data-url');
-                swal({
-                  title: "Habilitar Matricula",
-                  text: "Tem certeza que deseja habilitar esta Matricula?",
-                  icon: "warning",
-                  buttons: true,
-                  dangerMode: true,
-                })
-                .then((willDelete) => {
-                  if (willDelete) {
-                    $.ajax({
-                        url: url,
-                        success: function (data) {
-                            swal("Matricula habilitada com sucesso!", {
-                              icon: "success",
-                              timer: 3000
-                            });
-                            location.reload();
-                        }
-                    });
-
-                  } else {
-                    swal("Ação cancelada...");
-                  }
-                });
-            });
-
-        });
-    </script>
-
-{% endblock %}
